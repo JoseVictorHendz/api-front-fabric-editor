@@ -1,0 +1,160 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import './variables';
+@import './mixins';
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    background-color: #fafafa;
+}
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.mat-card .mat-divider{
+    position: relative !important;
+}
+table {
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table, th, td {
+    border: none;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    display: table-row;
+}
+td, th {
+    padding: 15px 5px;
+    display: table-cell;
+    // text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+th {
+    font-weight: bold;
+    text-align: -internal-center;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $primary-color;
+}
+.example-full-width {
+    width: 100%;
+}
+
+.full-card{
+    min-height: 40vh;
+    position: relative;
+}
+
+.primary-color {
+    background-color: $primary-color;
+}
+
+.accent-color {
+    background-color: $accent-color;
+    color: #fff !important;
+}
+
+.grey-color{
+    background-color: #e8e8e8;
+}
+
+.primary-text {
+    color: $primary-color;
+}
+
+.accent-text {
+    color: $accent-color;
+}
+.clickable{
+    cursor: pointer;
+}
+.col-xs-12{
+    margin-bottom: 20px;
+}
+.right {
+    text-align: right !important;
+}
+.left {
+    text-align: left !important;
+}
+.center {
+    text-align: center !important;
+}
+.breadcrumb {
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+}
+.breadcrumb:last-child {
+    color: #fff;
+}
+.breadcrumb:before {
+    content: '\E5CC';
+    color: #c7d4c3;
+    vertical-align: top;
+    display: inline-block;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 25px;
+    margin: 0 10px 0 8px;
+    -webkit-font-smoothing: antialiased;
+}
+a {
+    text-decoration: none;
+}
+.example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+.mat-form-field-ripple {
+    background-color: $primary-color;
+}
+.mat-focused .mat-form-field-label{
+    color: $primary-color;
+}
+.mat-input-element {
+    caret-color: $primary-color;;
+}
+.center-xs {
+    text-align: left !important;
+}
+.mat-button, .mat-fab, .mat-flat-button, .mat-icon-button, .mat-mini-fab, .mat-raised-button, .mat-stroked-button{
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+input, textarea, select, button{
+    font: 400 13.3333px Arial;
+}
+.mat-progress-spinner circle, .mat-spinner circle{
+    stroke: white;
+}
+.empty-table {
+    font-style: italic; 
+    color: #b7b7b7;
+}

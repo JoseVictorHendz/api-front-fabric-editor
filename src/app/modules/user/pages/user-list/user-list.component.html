@@ -1,0 +1,64 @@
+<div class="row center-xs">
+    <div class="col-xs-10">
+        <mat-card>
+            <mat-card-title>
+                <div class="row between-xs">
+                    Usuários
+                    <button class="accent-color" routerLink="register" mat-raised-button>+ Novo</button>
+                </div>
+                <br>
+                <mat-divider></mat-divider>
+            </mat-card-title>
+
+            <mat-progress-bar *ngIf="!users" mode="indeterminate"></mat-progress-bar>
+
+            <mat-card-content *ngIf="users">
+                <app-search (busca)="applyFilter($event)"></app-search>
+                
+                <mat-table #table [dataSource]="users">
+
+                    <!-- Name -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                        <mat-cell *matCellDef="let user"> {{user.people.name}} </mat-cell>
+                    </ng-container>
+
+                    <!-- UserName -->
+                    <ng-container matColumnDef="userName">
+                        <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
+                        <mat-cell *matCellDef="let user"> {{user.userName}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Bootons -->
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="end-cell"> Ações </mat-header-cell>
+                        <mat-cell *matCellDef="let user" class="end-cell">
+                            <button mat-icon-button (click)="update(user.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <app-delete-dialog (deletou)="delete(user.id)"></app-delete-dialog>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- active -->
+                    <ng-container matColumnDef="active">
+                        <mat-header-cell *matHeaderCellDef class="end-cell"> Ativo </mat-header-cell>
+                        <mat-cell *matCellDef="let user" class="end-cell">
+                            <!-- <mat-card class="result"> -->
+                                <mat-card-content>                    
+                                  <section class="example-section">
+                                    <mat-checkbox  [(ngModel)]="user.active" (click)="updateActive(user)" >{{user.active}}</mat-checkbox>
+                                  </section>
+                                </mat-card-content>
+                              <!-- </mat-card> -->
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </mat-card-content>
+            
+        </mat-card>
+    </div>
+</div>

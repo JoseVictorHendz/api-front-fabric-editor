@@ -1,0 +1,7 @@
+<button class="accent-color" (click)="clickEmitter()" mat-raised-button>
+  <div class="button-content">
+      <mat-spinner *ngIf="isLoading" [diameter]="25"></mat-spinner>
+      <ng-content *ngIf="!isLoading"></ng-content>
+  </div>
+</button>
+<button class="accent-color" mat-raised-button>SALVAR</button>

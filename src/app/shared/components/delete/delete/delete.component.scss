@@ -1,0 +1,9 @@
+@import '~sass/variables';
+
+.text{
+    margin-bottom: 15px;
+}
+.delete{
+    background-color: $danger-color;
+    color: white;
+}

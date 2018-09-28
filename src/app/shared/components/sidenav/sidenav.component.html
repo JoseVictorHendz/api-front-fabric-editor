@@ -1,0 +1,46 @@
+<mat-sidenav-container class="sidenav-position">
+  <mat-sidenav #sidenav mode="over" position="end" [(opened)]="opened">
+
+    <mat-list>
+      <!-- User -->
+      <mat-list-item>
+        <a class="menu-item clickable" (click)="redirect('/user'); sidenav.close()">
+          <div class="row between-xs middle-xs">
+            <span class="menu-item-name">User</span>
+            <mat-icon mat-list-icon>person</mat-icon>
+          </div>
+        </a>
+      </mat-list-item>
+
+      <!-- page -->
+      <mat-list-item>
+        <a class="menu-item clickable" (click)="redirect('/page'); sidenav.close()">
+          <div class="row between-xs middle-xs">
+            <span class="menu-item-name">Frabicar paginas</span>
+            <mat-icon mat-list-icon>person</mat-icon>
+          </div>
+        </a>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <!-- Logout -->
+      <mat-list-item>
+        <a class="menu-item clickable" (click)="logout(); sidenav.close()">
+          <div class="row between-xs middle-xs">
+            <span class="menu-item-name">Sair</span>
+            <mat-icon mat-list-icon>exit_to_app</mat-icon>
+          </div>
+        </a>
+      </mat-list-item>
+
+    </mat-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar *ngIf="_auth.token" (toggle)="sidenav.toggle()"></app-navbar>
+    <div [ngClass]="_auth.token ? 'under-navbar' : ''">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

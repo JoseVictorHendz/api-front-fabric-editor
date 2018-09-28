@@ -1,0 +1,76 @@
+<div class="row center-xs">
+  <div class="col-xs-10">
+    <mat-card>
+      <mat-card-title>
+        <div class="row begin-xs">
+          Usuário
+        </div>
+      </mat-card-title>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <div class="example-form">
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nome" value="" [(ngModel)]="user.people.name">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Usuário" value="" [(ngModel)]="user.userName">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Telefone" value="" [(ngModel)]="user.people.phone">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" value="" [(ngModel)]="user.people.email">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Endereço" value="" [(ngModel)]="user.people.address">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Numero" value="" [(ngModel)]="user.people.addressNumber">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Pais" value="" [(ngModel)]="user.people.country">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Estado" value="" [(ngModel)]="user.people.state">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Cidade" value="" [(ngModel)]="user.people.city">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row end-xs">
+            <div class="col-xs-6">
+              <button style="background-color: #e8e8e8" routerLink="/user" mat-raised-button>CANCELAR</button>
+              <button class="accent-color" (click)="save()" mat-raised-button>SALVAR</button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

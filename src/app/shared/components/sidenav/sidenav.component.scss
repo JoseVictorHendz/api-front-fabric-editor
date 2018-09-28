@@ -1,0 +1,23 @@
+.sidenav-position {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.menu-item-name {
+    font-weight: bold;
+}
+.menu-item {
+    width: 100%;
+    padding: 5px 10px 0 10px;
+}
+mat-sidenav {
+    width: 300px;
+}
+mat-divider {
+    margin: 5px 0 5px 0;
+}
+.under-navbar {
+    margin-top: 74px;
+}

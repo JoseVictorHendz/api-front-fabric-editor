@@ -1,0 +1,28 @@
+<div class="row center-xs middle-xs full-height">
+  <div class="col-xs-10 col-sm-4 col-md-3">
+    <mat-card>
+      <mat-card-content>
+        <h1 class="center">FabricEditor</h1>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <div class="example-form">
+          <div class="row">
+            <mat-form-field class="col-xs-12">
+              <input type="text" matInput [(ngModel)]="user.userName" placeholder="Usuário">
+            </mat-form-field>
+            <mat-form-field class="col-xs-12">
+              <input type="password" matInput [(ngModel)]="user.password" placeholder="Senha">
+            </mat-form-field>
+          </div>
+          <div class="row end-xs">
+            <button *ngIf="!isLoading" mat-raised-button  class="accent-color" (click)="login()">Login</button>
+            <div *ngIf="isLoading" class="col-xs-12">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
