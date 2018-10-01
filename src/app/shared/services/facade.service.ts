@@ -1,5 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { UserService } from './services/user.service';
+import { PageService } from './services/page.service';
 
 
 @Injectable()
@@ -22,6 +23,15 @@ export class FacadeService {
     return this._userService;
   }
 
+    // Page Service
+    private _pageService: PageService;
+    private get pageService(): PageService {
+      if (!this._userService) {
+        this._pageService = this.injector.get(PageService);
+      }
+      return this._pageService;
+    }
+
   constructor(private injector: Injector) { }
 
   // getExamples(){return this.exampleService.get()}
@@ -36,4 +46,12 @@ export class FacadeService {
   putUser(user) { return this.userService.put(user); }
   putActiveUser(user) { return this.userService.putActive(user); }
   deleteUser(user) { return this.userService.delete(user); }
+
+    // Page
+    getPage() { return this.pageService.get(); }
+    getPageById(id) { return this.pageService.getById(id); }
+    postPage(page) { return this.pageService.post(page); }
+    putPage(page) { return this.pageService.put(page); }
+    putActivePage(page) { return this.pageService.putActive(page); }
+    deletePage(page) { return this.pageService.delete(page); }
 }

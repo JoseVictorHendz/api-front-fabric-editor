@@ -1,3 +1,64 @@
-<p>
-  page-list works!
-</p>
+<div class="row center-xs">
+  <div class="col-xs-10">
+      <mat-card>
+          <mat-card-title>
+              <div class="row between-xs">
+                  Páginas
+                  <button class="accent-color" routerLink="generation" mat-raised-button>+ Novo</button>
+              </div>
+              <br>
+              <mat-divider></mat-divider>
+          </mat-card-title>
+
+          <mat-progress-bar *ngIf="!pages" mode="indeterminate"></mat-progress-bar>
+
+          <mat-card-content *ngIf="pages">
+              <app-search (busca)="applyFilter($event)"></app-search>
+              
+              <mat-table #table [dataSource]="pages">
+
+                  <!-- Name -->
+                  <ng-container matColumnDef="name">
+                      <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                      <mat-cell *matCellDef="let page"> {{page.name}} </mat-cell>
+                  </ng-container>
+
+                  <!-- creationDate -->
+                  <ng-container matColumnDef="creationDate">
+                      <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
+                      <mat-cell *matCellDef="let page"> {{page.creationDate}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Bootons -->
+                  <ng-container matColumnDef="actions">
+                      <mat-header-cell *matHeaderCellDef class="end-cell"> Ações </mat-header-cell>
+                      <mat-cell *matCellDef="let page" class="end-cell">
+                          <button mat-icon-button (click)="update(page.id)">
+                              <mat-icon>edit</mat-icon>
+                          </button>
+                          <app-delete-dialog (deletou)="delete(page.id)"></app-delete-dialog>
+                      </mat-cell>
+                  </ng-container>
+
+                  <!-- active -->
+                  <ng-container matColumnDef="active">
+                      <mat-header-cell *matHeaderCellDef class="end-cell"> Ativo </mat-header-cell>
+                      <mat-cell *matCellDef="let page" class="end-cell">
+                          <!-- <mat-card class="result"> -->
+                              <mat-card-content>                    
+                                <section class="example-section">
+                                  <mat-checkbox  [(ngModel)]="page.active" (click)="updateActive(page)" >{{page.active}}</mat-checkbox>
+                                </section>
+                              </mat-card-content>
+                            <!-- </mat-card> -->
+                      </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+          </mat-card-content>
+          
+      </mat-card>
+  </div>
+</div>

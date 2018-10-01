@@ -1,3 +1,45 @@
-<p>
-  page-generation works!
-</p>
+<div class="row center-xs">
+  <div class="col-xs-10">
+    <mat-card>
+      <mat-card-title>
+        <div class="row begin-xs">
+          Páginas
+        </div>
+      </mat-card-title>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <div class="example-form">
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nome" value="" [(ngModel)]="page.name">
+              </mat-form-field>
+            </div>
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Data de criação" value="" [(ngModel)]="page.creationDate">
+              </mat-form-field>
+            </div>
+            <div class="col-xs"  *ngIf="page.user.userName">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Pertence ao usuário" disabled value="" [(ngModel)]="page.user.userName" >
+              </mat-form-field>
+            </div>
+            <div class="col-xs"  *ngIf="!page.user.userName">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Pertence ao usuário" [(ngModel)]="page.user.userName" >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row end-xs">
+            <div class="col-xs-6">
+              <button style="background-color: #e8e8e8" routerLink="/page" mat-raised-button>CANCELAR</button>
+              <button class="accent-color" (click)="save()" mat-raised-button>SALVAR</button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content> 
+    </mat-card>
+  </div>
+</div>

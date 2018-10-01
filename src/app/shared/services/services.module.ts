@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FacadeService } from './facade.service';
 import { UserService } from './services/user.service';
+import { PageService } from './services/page.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { UserService } from './services/user.service';
     BaseService,
     FacadeService,
 
+    PageService,
     UserService
   ]
 })
