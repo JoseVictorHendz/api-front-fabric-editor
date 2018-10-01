@@ -70,7 +70,6 @@ export class UserListComponent implements OnInit {
   delete(id) {
     this._facade.deleteUser(id)
       .subscribe(res => {
-        console.log('sucesso');
         this.populaUser();
       });
   }
