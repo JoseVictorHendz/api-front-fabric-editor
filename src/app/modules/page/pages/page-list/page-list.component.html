@@ -3,7 +3,8 @@
       <mat-card>
           <mat-card-title>
               <div class="row between-xs">
-                  Páginas
+                  Páginas                  
+                  <button class="accent-color" routerLink="1" mat-raised-button>Exemplo canvas</button>
                   <button class="accent-color" routerLink="generation" mat-raised-button>+ Novo</button>
               </div>
               <br>
@@ -25,7 +26,7 @@
 
                   <!-- creationDate -->
                   <ng-container matColumnDef="creationDate">
-                      <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
+                      <mat-header-cell *matHeaderCellDef> Criada em </mat-header-cell>
                       <mat-cell *matCellDef="let page"> {{page.creationDate}} </mat-cell>
                   </ng-container>
 

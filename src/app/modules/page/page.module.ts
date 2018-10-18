@@ -13,11 +13,19 @@ import {
   MatButtonModule,
   MatInputModule,
   MatProgressBarModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSidenavModule,
+  MatListModule,
+  MatToolbarModule
+
  } from '../../../../node_modules/@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DeleteModule } from '../../shared/components/delete/delete.module';
 import { SearchModule } from '../../shared/components/search/search.module';
+import { ExemploComponent } from './pages/exemplo/exemplo.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import {} from '@angular/material/sidenav';
+import { NgDragDropModule } from 'ng-drag-drop';
 
 @NgModule({
   imports: [
@@ -31,10 +39,16 @@ import { SearchModule } from '../../shared/components/search/search.module';
     MatButtonModule,
     MatInputModule,
     MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
     FormsModule,
     DeleteModule,
     SearchModule,
+    FormsModule,
+    ColorPickerModule,
+    NgDragDropModule
   ],
-  declarations: [PageGenerationComponent, PageListComponent]
+  declarations: [PageGenerationComponent, PageListComponent, ExemploComponent],
 })
 export class PageModule { }
