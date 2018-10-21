@@ -14,9 +14,10 @@ declare const fabric: any;
 })
 
 export class PageGenerationComponent implements OnInit {
-  //#region PropsForCanvas
-  private canvas: any;
 
+  //#region CanvasAtribute
+
+  private canvas: any;
   private props: any = {
     canvasFill: '#ffffff',
     canvasImage: '',
@@ -33,6 +34,8 @@ export class PageGenerationComponent implements OnInit {
     TextDecoration: ''
   };
 
+  private textString: string;
+  private url = '';
   private size: any = {
     width: 500,
     height: 800
@@ -114,7 +117,175 @@ export class PageGenerationComponent implements OnInit {
     // });
 
   }
-  //#region globalActionsForElements
+
+  //#region BlockElements
+
+  // Block "Size"
+
+  changeSize(event: any) {
+    this.canvas.setWidth(this.size.width);
+    this.canvas.setHeight(this.size.height);
+  }
+
+  // Block "Add text"
+
+  addText() {
+    const textString = this.textString;
+    const text = new fabric.IText(textString, {
+      left: 10,
+      top: 10,
+      fontFamily: 'helvetica',
+      angle: 0,
+      fill: '#000000',
+      scaleX: 0.5,
+      scaleY: 0.5,
+      fontWeight: '',
+      hasRotatingPoint: true
+    });
+    this.extend(text, this.randomId());
+    this.canvas.add(text);
+    this.selectItemAfterAdded(text);
+    this.textString = '';
+  }
+
+  // Block "Add images"
+
+  getImgPolaroid(event: any) {
+    const el = event.target;
+    fabric.Image.fromURL(el.src, (image) => {
+      image.set({
+        left: 10,
+        top: 10,
+        angle: 0,
+        padding: 10,
+        cornersize: 10,
+        hasRotatingPoint: true,
+        peloas: 12
+      });
+      image.setWidth(150);
+      image.setHeight(150);
+      this.extend(image, this.randomId());
+      this.canvas.add(image);
+      this.selectItemAfterAdded(image);
+    });
+  }
+
+  // Block "Upload Image"
+
+  addImageOnCanvas(url) {
+    if (url) {
+      fabric.Image.fromURL(url, (image) => {
+        image.set({
+          left: 10,
+          top: 10,
+          angle: 0,
+          padding: 10,
+          cornersize: 10,
+          hasRotatingPoint: true
+        });
+        image.setWidth(200);
+        image.setHeight(200);
+        this.extend(image, this.randomId());
+        this.canvas.add(image);
+        this.selectItemAfterAdded(image);
+      });
+    }
+  }
+
+  readUrl(event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event) => {
+        this.url = event.target['result'];
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  removeWhite(url) {
+    this.url = '';
+  }
+
+  // Block "Add figure"
+
+  addFigure(figure) {
+    let add: any;
+    switch (figure) {
+      case 'rectangle':
+        add = new fabric.Rect({
+          width: 200, height: 100, left: 10, top: 10, angle: 0,
+          fill: '#3f51b5'
+        });
+        break;
+      case 'square':
+        add = new fabric.Rect({
+          width: 100, height: 100, left: 10, top: 10, angle: 0,
+          fill: '#4caf50'
+        });
+        break;
+      case 'triangle':
+        add = new fabric.Triangle({
+          width: 100, height: 100, left: 10, top: 10, fill: '#2196f3'
+        });
+        break;
+      case 'circle':
+        add = new fabric.Circle({
+          radius: 50, left: 10, top: 10, fill: '#ff5722'
+        });
+        break;
+    }
+    this.extend(add, this.randomId());
+    this.canvas.add(add);
+    this.selectItemAfterAdded(add);
+  }
+  //#endregion
+
+  //#region Canvas
+
+  cleanSelect() {
+    this.canvas.deactivateAllWithDispatch().renderAll();
+  }
+
+  selectItemAfterAdded(obj) {
+    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.setActiveObject(obj);
+  }
+
+  setCanvasFill() {
+    if (!this.props.canvasImage) {
+      this.canvas.backgroundColor = this.props.canvasFill;
+      this.canvas.renderAll();
+    }
+  }
+
+  extend(obj, id) {
+    obj.toObject = (function (toObject) {
+      return function () {
+        return fabric.util.object.extend(toObject.call(this), {
+          id: id
+        });
+      };
+    })(obj.toObject);
+  }
+
+  setCanvasImage() {
+    const self = this;
+    if (this.props.canvasImage) {
+      this.canvas.setBackgroundColor({ source: this.props.canvasImage, repeat: 'repeat' }, function () {
+        //  self.props.canvasFill = '';
+        self.canvas.renderAll();
+      });
+    }
+  }
+
+  randomId() {
+    return Math.floor(Math.random() * 999999) + 1;
+  }
+  //#endregion
+
+  //#region  GlobalActionsForElement
+
   getActiveStyle(styleName, object) {
     object = object || this.canvas.getActiveObject();
     if (!object) {
@@ -310,57 +481,122 @@ export class PageGenerationComponent implements OnInit {
 
   //#endregion
 
-  addFigure(figure) {
-    let add: any;
-    switch (figure) {
-      case 'rectangle':
-        add = new fabric.Rect({
-          width: 200, height: 100, left: 10, top: 10, angle: 0,
-          fill: '#3f51b5'
-        });
-        break;
-      case 'square':
-        add = new fabric.Rect({
-          width: 100, height: 100, left: 10, top: 10, angle: 0,
-          fill: '#4caf50'
-        });
-        break;
-      case 'triangle':
-        add = new fabric.Triangle({
-          width: 100, height: 100, left: 10, top: 10, fill: '#2196f3'
-        });
-        break;
-      case 'circle':
-        add = new fabric.Circle({
-          radius: 50, left: 10, top: 10, fill: '#ff5722'
-        });
-        break;
+  //#region System
+
+
+  removeSelected() {
+    const activeObject = this.canvas.getActiveObject(),
+      activeGroup = this.canvas.getActiveGroup();
+
+    if (activeObject) {
+      this.canvas.remove(activeObject);
+      //  this.textString = '';
+    } else if (activeGroup) {
+      const objectsInGroup = activeGroup.getObjects();
+      this.canvas.discardActiveGroup();
+      const self = this;
+      objectsInGroup.forEach(function (object) {
+        self.canvas.remove(object);
+      });
     }
-    this.extend(add, this.randomId());
-    this.canvas.add(add);
-    this.selectItemAfterAdded(add);
   }
 
-  randomId() {
-    return Math.floor(Math.random() * 999999) + 1;
+  bringToFront() {
+    const activeObject = this.canvas.getActiveObject(),
+      activeGroup = this.canvas.getActiveGroup();
+
+    if (activeObject) {
+      activeObject.bringToFront();
+      //  activeObject.opacity = 1;
+    } else if (activeGroup) {
+      const objectsInGroup = activeGroup.getObjects();
+      this.canvas.discardActiveGroup();
+      objectsInGroup.forEach((object) => {
+        object.bringToFront();
+      });
+    }
   }
 
-  //#region Canvas
+  sendToBack() {
+    const activeObject = this.canvas.getActiveObject(),
+      activeGroup = this.canvas.getActiveGroup();
 
-  selectItemAfterAdded(obj) {
-    this.canvas.deactivateAllWithDispatch().renderAll();
-    this.canvas.setActiveObject(obj);
+    if (activeObject) {
+      activeObject.sendToBack();
+      //  activeObject.opacity = 1;
+    } else if (activeGroup) {
+      const objectsInGroup = activeGroup.getObjects();
+      this.canvas.discardActiveGroup();
+      objectsInGroup.forEach((object) => {
+        object.sendToBack();
+      });
+    }
   }
 
-  extend(obj, id) {
-    obj.toObject = (function (toObject) {
-      return function () {
-        return fabric.util.object.extend(toObject.call(this), {
-          id: id
-        });
-      };
-    })(obj.toObject);
+  confirmClear() {
+    if (confirm('Are you sure?')) {
+      this.canvas.clear();
+    }
   }
+
+  rasterize() {
+    if (!fabric.Canvas.supports('toDataURL')) {
+      alert('This browser doesn\'t provide means to serialize canvas to an image');
+    } else {
+      console.log(this.canvas.toDataURL('png'));
+      // window.open(this.canvas.toDataURL('png'));
+      const image = new Image();
+      image.src = this.canvas.toDataURL('png');
+      const w = window.open('');
+      w.document.write(image.outerHTML);
+    }
+  }
+
+  rasterizeSVG() {
+    console.log(this.canvas.toSVG());
+    //  window.open(
+    //    'data:image/svg+xml;utf8,' +
+    //    encodeURIComponent(this.canvas.toSVG()));
+    //  console.log(this.canvas.toSVG())
+    //  var image = new Image();
+    //  image.src = this.canvas.toSVG()
+    const w = window.open('');
+    w.document.write(this.canvas.toSVG());
+  }
+
+
+  saveCanvasToJSON() {
+    const json = JSON.stringify(this.canvas);
+    localStorage.setItem('Kanvas', json);
+    console.log('json');
+    console.log(json);
+
+  }
+
+  loadCanvasFromJSON() {
+    const CANVAS = localStorage.getItem('Kanvas');
+    console.log('CANVAS');
+    console.log(CANVAS);
+
+    //  and load everything from the same json
+    this.canvas.loadFromJSON(CANVAS, () => {
+      console.log('CANVAS untar');
+      console.log(CANVAS);
+
+      //  making sure to render canvas at the end
+      this.canvas.renderAll();
+
+      //  and checking if object's "name" is preserved
+      console.log('this.canvas.item(0).name');
+      console.log(this.canvas);
+    });
+
+  }
+
+  rasterizeJSON() {
+    this.json = JSON.stringify(this.canvas, null, 2);
+  }
+
   resetPanels() {
     this.textEditor = false;
     this.imageEditor = false;
