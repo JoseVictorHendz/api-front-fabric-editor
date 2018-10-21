@@ -16,7 +16,7 @@ import {
   MatCheckboxModule,
   MatSidenavModule,
   MatListModule,
-  MatToolbarModule
+  MatToolbarModule,
 
  } from '../../../../node_modules/@angular/material';
 import { FormsModule } from '@angular/forms';

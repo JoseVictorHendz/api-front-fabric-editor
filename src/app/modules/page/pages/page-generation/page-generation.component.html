@@ -1,26 +1,32 @@
 <div class="page">
 
   <mat-toolbar>
-      <div class="title">
-          <div class="title-text">
-              Componentes
-          </div>
+    <div class="title">
+      <div class="title-text">
+        Componentes
       </div>
-      
-      <span class="span-spacer"></span>
-      <div >
-        <button style="background-color: #e8e8e8" routerLink="/page" mat-raised-button>CANCELAR</button>
-        <button class="accent-color" (click)="save()" mat-raised-button>SALVAR</button>
-      </div>
-          
-    </mat-toolbar>
+    </div>
 
-    <mat-drawer-container>
+    <span class="span-spacer"></span>
+    <div>
+      <button style="background-color: #e8e8e8" routerLink="/page" mat-raised-button>CANCELAR</button>
+      <button class="accent-color" (click)="save()" mat-raised-button>SALVAR</button>
+    </div>
+
+  </mat-toolbar>
+
+  <!-- <mat-drawer-container>
+
+  </mat-drawer-container> -->
+
+  <mat-drawer-container class="example-container">
+
+    <mat-drawer mode="side" opened>
       <mat-list>
-        <!-- Test -->
         <mat-list-item>
           <a class="menu-item clickable" (click)="redirect('/user'); sidenav.close()">
             <div class="row between-xs middle-xs">
+              <button type="button" class="btn btn-primary" (click)="addFigure('rectangle');">Rectangle</button>
               <span class="menu-item-name">Teste</span>
               <mat-icon mat-list-icon>notes</mat-icon>
             </div>
@@ -28,7 +34,13 @@
         </mat-list-item>
 
         <mat-divider></mat-divider>
-  
+
       </mat-list>
-    </mat-drawer-container>
-</div>  
+    </mat-drawer>
+
+    <mat-drawer-content>
+      <canvas id="canvas"></canvas>
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+</div>
